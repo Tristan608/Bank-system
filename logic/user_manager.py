@@ -37,6 +37,9 @@ class UserManager:
         self.data_layer.save_users(users)
 
         return new_user
+    
+    def view_all_users(self) -> list[User]:
+        return self.data_layer.load_users()
 
     def logout(self, user: User):
         pass
