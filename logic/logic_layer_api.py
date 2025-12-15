@@ -29,14 +29,22 @@ class LogicLayerAPI:
     def view_balance(self, account_id: int) -> float:
         return self.account_manager.view_balance(account_id)
     
-    def deposit(self, amount: float, account_id: int) -> None:
-        self.transaction_manager.deposit(amount, account_id)
+    def deposit(self, account_id: str, amount: float) -> bool:
+        try:
+            self.transaction_manager.deposit(amount, account_id)
+            return True
+        except ValueError:
+            return False
 
     def withdraw(self, amount: float, account_id: int) -> None:
         self.transaction_manager.withdraw(amount, account_id)
     
-    def transfer(self, amount: float, reciever_id: int, sender_id: int) -> None:
-        self.transaction_manager.transfer(amount, reciever_id, sender_id)
+    def transfer(self, sender_id: str, reciever_id: str, amount: float) -> bool:
+        try:
+            self.transaction_manager.transfer(amount, reciever_id, sender_id)
+            return True
+        except ValueError:
+            return False
     
     def view_transaction_history(self, account_id: int) -> list[Transaction]:
         return self.transaction_manager.view_transaction_history(account_id)
@@ -49,7 +57,10 @@ class LogicLayerAPI:
         }
     
     def read_system_instructions(self) -> str:
-        return "Welcome to Mini Bank! Use this system to manage your accounts and transactions securely."
+        return "Welcome to Mini Bank! Use this system to manage your accounts and transactions securely. \nTalk to an admin or a manager to open an account or create a user."
+    
+    def get_user_account(self, user_id: str) -> list[Account]:
+            return self.account_manager.get_user_account(user_id)
     
 
     

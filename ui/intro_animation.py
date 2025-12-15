@@ -4,7 +4,7 @@ from rich.live import Live
 from rich.align import Align
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 from rich.text import Text
-from ui.ui_helpers import COLORS
+from ui.ui_helpers import COLORS, clear_screen
 import time
 
 console = Console()
@@ -12,7 +12,7 @@ console = Console()
 
 def play_intro_animation():
     """Play an enhanced intro animation with progress indicators"""
-    console.clear()
+    clear_screen()
     
     # Animated logo reveal
     logo_lines = [

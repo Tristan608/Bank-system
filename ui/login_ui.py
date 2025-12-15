@@ -8,7 +8,7 @@ from ui.ui_helpers import (
     pause,
     COLORS
 )
-from rich.prompt import IntPrompt
+from rich.prompt import Prompt
 
 
 def show_login_screen(logic_layer: LogicLayerAPI):
@@ -19,13 +19,13 @@ def show_login_screen(logic_layer: LogicLayerAPI):
 
     # --- Input ---
     try:
-        user_id = IntPrompt.ask(
+        user_id = str(Prompt.ask(
             f"[{COLORS['muted']}]User ID[/{COLORS['muted']}]"
-        )
-        pin = IntPrompt.ask(
+        ))
+        pin = str(Prompt.ask(
             f"[{COLORS['muted']}]PIN[/{COLORS['muted']}]",
             password=True
-        )
+        ))
     except KeyboardInterrupt:
         return None  # user pressed Ctrl+C safely
 

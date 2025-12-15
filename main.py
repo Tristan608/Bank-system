@@ -2,6 +2,7 @@ from ui.intro_animation import play_intro_animation
 from ui.main_ui import MainUI
 from logic.logic_layer_api import LogicLayerAPI
 from data.data_layer_api import DataLayerAPI
+from ui.ui_helpers import clear_screen
 
 def main():
     """Entry point for the Banking System application"""

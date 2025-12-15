@@ -5,6 +5,9 @@ from rich.text import Text
 from rich.box import DOUBLE, ROUNDED, HEAVY
 from rich.rule import Rule
 from rich import box
+import os
+import subprocess
+import time
 
 console = Console()
 
@@ -22,7 +25,13 @@ COLORS = {
 }
 
 def clear_screen():
-    console.clear()
+    """Force-clear the terminal buffer and reset cursor position."""
+    if os.name == 'nt':  # Windows: cls
+        subprocess.call('cls', shell=True)
+    else:  # *nix: clear
+        subprocess.call('clear', shell=True)
+    console.clear()  # home cursor and clear via Rich
+    time.sleep(0.01)
 
 def print_error(message: str):
     console.print(f"\n[{COLORS['error']}]╳ {message}[/{COLORS['error']}]")

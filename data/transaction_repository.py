@@ -1,4 +1,6 @@
 import json
+import os
+from json import JSONDecodeError
 from models.transaction import Transaction
 
 class TransactionRepository:
@@ -6,8 +8,17 @@ class TransactionRepository:
         self.file_path = "storage/transactions.json"
     
     def read_transactions_from_file(self) -> list[dict]:
+        # Handle missing or empty files
+        if not os.path.exists(self.file_path):
+            return []
+        if os.path.getsize(self.file_path) == 0:
+            return []
+        
         with open(self.file_path, "r") as file:
-            data = json.load(file)
+            try:
+                data = json.load(file)
+            except JSONDecodeError:
+                return []
         return data
 
     def write_transactions_to_file(self, transactions: list[dict]) -> None:

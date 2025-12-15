@@ -1,0 +1,20 @@
+[
+    {
+        "user_id": "1",
+        "name": "Tristan",
+        "pin": "1234",
+        "role": "admin"
+    },
+    {
+        "user_id": "U8663",
+        "name": "Daniel",
+        "pin": "1976",
+        "role": "user"
+    },
+    {
+        "user_id": "U1095",
+        "name": "Sigrun",
+        "pin": "10",
+        "role": "user"
+    }
+]

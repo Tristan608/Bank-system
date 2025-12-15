@@ -11,12 +11,16 @@ class AccountManager:
         accounts = self.data_layer.load_accounts()
 
         # generate new account_id
-        new_id = random.randint(100000, 999999)
+        new_id = str(random.randint(100000, 999999))
         while any(account.account_id == new_id for account in accounts):
             new_id = str(random.randint(100000, 999999))
         
-        # create new account object
-        new_account = Account(new_id, user_id, starting_balance)
+        # create new account object (Account needs: account_id, user_id, balance)
+        new_account = Account(
+            account_id=new_id,
+            user_id=user_id,
+            balance=starting_balance
+        )
 
         # add to accounts list and save
         accounts.append(new_account)
@@ -34,6 +38,11 @@ class AccountManager:
             if account.account_id == account_id:
                 return account.balance
         return None
+    
+    def get_user_account(self, user_id: str) -> list[Account]:
+        accounts = self.data_layer.load_accounts()
+        return [account for account in accounts if account.user_id == user_id]
+    
     
 
 

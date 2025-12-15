@@ -1,0 +1,18 @@
+[
+    {
+        "transaction_id": "T426153",
+        "transaction_type": "deposit",
+        "amount": 1000.0,
+        "sender_id": null,
+        "receiver_id": "750158",
+        "timestamp": "2025-12-15T22:39:23.066648"
+    },
+    {
+        "transaction_id": "T688233",
+        "transaction_type": "transfer",
+        "amount": 500.0,
+        "sender_id": "750158",
+        "receiver_id": "580652",
+        "timestamp": "2025-12-15T22:48:15.793429"
+    }
+]

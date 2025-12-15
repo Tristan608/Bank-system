@@ -1,6 +1,6 @@
 from ui.menu_ui import show_menu
 from ui.ui_helpers import (
-    console, clear_screen, show_logo, print_error, print_success, 
+    console, clear_screen, show_header, show_logo, print_error, print_success, 
     print_info, pause, show_divider, COLORS
 )
 from ui.intro_animation import play_intro_animation
@@ -9,11 +9,17 @@ from rich.align import Align
 from rich.text import Text
 from logic.logic_layer_api import LogicLayerAPI
 from ui.login_ui import show_login_screen
+from ui.admin_ui import AdminUI
+from ui.user_ui import UserUI
+from ui.guest_ui import GuestUI
 
 
 class MainUI:
     def __init__(self, logic_layer: LogicLayerAPI):
         self.logic_layer = logic_layer
+        self.guest_ui = GuestUI(logic_layer)
+        self.admin_ui = AdminUI(logic_layer)
+        self.user_ui = UserUI(logic_layer)
         self.current_user = None
         self.current_role = None
     
@@ -23,6 +29,7 @@ class MainUI:
         while True:
             clear_screen()
             show_logo()
+            show_header("Main Menu", icon="🏠") 
             choice = show_menu()
 
             if choice == '1':
@@ -32,13 +39,17 @@ class MainUI:
                     self.current_user = user
 
                     if user.role == 'admin':
-                        self.run_admin_ui()
+                        clear_screen()
+                        self.admin_ui.run(user)
                     else:
-                        self.run_user_ui()
+                        clear_screen()
+                        self.user_ui.run(user)
+
                     
 
             elif choice == '2':
-                self.continue_as_guest()
+                clear_screen()
+                self.guest_ui.run()
             elif choice == 'E' or choice == 'e':
                 self.exit_application()
                 break
@@ -51,7 +62,6 @@ class MainUI:
     def exit_application(self):
         """Display farewell message and exit"""
         clear_screen()
-        
         farewell_text = Text()
         farewell_text.append("\n\n")
         farewell_text.append("Thank you for using Mini Bank!\n\n", style=f"bold {COLORS['primary']}")
@@ -65,3 +75,4 @@ class MainUI:
         )
         console.print(panel)
         console.print()
+        pause()

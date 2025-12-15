@@ -9,8 +9,6 @@ from rich.align import Align
 
 def show_menu():
     """Display the main menu with modern card-based design"""
-    console.clear()
-    show_header("Main Menu", icon="🏠")
 
     options = "\n".join([
         "[1] 🔐 Login",
