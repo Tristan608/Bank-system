@@ -22,4 +22,8 @@ mini_bank_system/
 1. Clone the repository
 2. Run:
 ```bash
+
+## rich libriary
+1. pip install rich 
+
 python main.py

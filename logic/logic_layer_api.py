@@ -50,6 +50,7 @@ class LogicLayerAPI:
     
     def read_system_instructions(self) -> str:
         return "Welcome to Mini Bank! Use this system to manage your accounts and transactions securely."
+    
 
     
 

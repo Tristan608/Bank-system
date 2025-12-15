@@ -8,9 +8,15 @@ class UserRepository:
         
 
     def read_users_from_file(self) -> list[dict]:
-        with open(self.file_path, "r") as file:
-            data = json.load(file)
-        return data
+        try:
+            with open(self.file_path, "r") as file:
+                content = file.read().strip()
+                if not content:
+                    return []
+                return json.loads(content)
+        except FileNotFoundError:
+            return []
+    
     
     def write_users_to_file(self, users: list[dict]) -> None:
         with open(self.file_path, "w") as file:
@@ -81,4 +87,18 @@ with open("file_name.json", "w") as file:
 
 
 
+ def read_users_from_file(self) -> list[dict]:
+        # Gracefully handle missing or empty files
+        if not os.path.exists(self.file_path):
+            return []
+        if os.path.getsize(self.file_path) == 0:
+            return []
+
+        with open(self.file_path, "r") as file:
+            try:
+                data = json.load(file)
+            except JSONDecodeError:
+                # If file is corrupt/empty, treat as no users
+                return []
+        return data
 """
